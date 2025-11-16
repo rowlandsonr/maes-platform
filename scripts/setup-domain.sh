@@ -183,16 +183,16 @@ echo -e "${GREEN}✅ Environment configuration created${NC}"
 
 # Stop any running services
 echo -e "${BLUE}🛑 Stopping any running services...${NC}"
-docker-compose down -v 2>/dev/null || true
+docker compose down -v 2>/dev/null || true
 
 # Build services
 echo -e "${BLUE}🔨 Building Docker services...${NC}"
-docker-compose build
+docker compose build
 
 if [ "$IS_LOCALHOST" = true ]; then
     # Localhost setup
     echo -e "${BLUE}🚀 Starting services for localhost...${NC}"
-    docker-compose up -d
+    docker compose up -d
     
     echo ""
     echo -e "${GREEN}🎉 MAES is ready for localhost development!${NC}"
@@ -206,7 +206,7 @@ elif [ "$USE_SSL" = true ]; then
     ./ssl/init-letsencrypt.sh
     
     echo -e "${BLUE}🚀 Starting all services...${NC}"
-    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+    docker compose -f docker compose.yml -f docker compose.prod.yml up -d
     
     echo ""
     echo -e "${GREEN}🎉 MAES is ready with Let's Encrypt!${NC}"
@@ -215,7 +215,7 @@ elif [ "$USE_SSL" = true ]; then
 else
     # Custom domain with self-signed certificate
     echo -e "${BLUE}🚀 Starting services with self-signed certificate...${NC}"
-    docker-compose up -d
+    docker compose up -d
     
     echo ""
     echo -e "${GREEN}🎉 MAES is ready with self-signed certificate!${NC}"
@@ -226,13 +226,13 @@ fi
 # Show helpful commands
 echo ""
 echo -e "${CYAN}📋 Helpful commands:${NC}"
-echo -e "   View logs: ${YELLOW}docker-compose logs -f${NC}"
-echo -e "   Stop services: ${YELLOW}docker-compose down${NC}"
-echo -e "   Restart: ${YELLOW}docker-compose restart${NC}"
+echo -e "   View logs: ${YELLOW}docker compose logs -f${NC}"
+echo -e "   Stop services: ${YELLOW}docker compose down${NC}"
+echo -e "   Restart: ${YELLOW}docker compose restart${NC}"
 
 if [ "$USE_SSL" = true ] && [ "$IS_LOCALHOST" = false ]; then
-    echo -e "   Certificate logs: ${YELLOW}docker-compose logs -f certbot${NC}"
-    echo -e "   Renew certificates: ${YELLOW}docker-compose exec certbot certbot renew${NC}"
+    echo -e "   Certificate logs: ${YELLOW}docker compose logs -f certbot${NC}"
+    echo -e "   Renew certificates: ${YELLOW}docker compose exec certbot certbot renew${NC}"
 fi
 
 echo ""
