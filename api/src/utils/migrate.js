@@ -5,7 +5,7 @@ const { logger } = require('./logger');
 
 class MigrationManager {
   constructor() {
-    this.migrationsPath = path.join(__dirname, '../../..', 'migrations');
+    this.migrationsPath = path.join(__dirname, '../..', 'migrations');
   }
 
   async initialize() {
