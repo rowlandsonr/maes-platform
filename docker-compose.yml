@@ -198,7 +198,7 @@ services:
       - '--web.external-url=https://localhost/prometheus/'
       - '--web.route-prefix=/'
     ports:
-      - "9090:9090"
+      - "9080:9090"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus
